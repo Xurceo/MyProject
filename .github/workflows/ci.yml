@@ -53,8 +53,27 @@ jobs:
       - name: Count lines of code with Cloc
         run: |
           sudo apt-get install -y cloc
-          cloc src/ > cloc-report.txt
+
+          echo "Структура проєкту:"
+          ls -la
+
+          if [ -d "src" ]; then
+            TARGET="src/"
+          elif [ -d "app" ]; then
+            TARGET="app/"
+          else
+            TARGET="."
+          fi
+
+          echo "Сканую: $TARGET"
+          cloc $TARGET --out=cloc-report.txt
           cat cloc-report.txt
+
+      - name: Upload Cloc report
+        uses: actions/upload-artifact@v3
+        with:
+          name: cloc-report
+          path: cloc-report.txt
 
       - name: Run SonarQube analysis
         continue-on-error: true
