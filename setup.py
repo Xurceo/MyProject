@@ -1,4 +1,5 @@
 import feature
 
 f1 = feature.Feature(1, "New Feature")
-print(f1)
+f2 = feature.Feature(2, "Newer Feature")
+print(f1, ",", f2)
