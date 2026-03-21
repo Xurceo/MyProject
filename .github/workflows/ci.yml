@@ -103,3 +103,10 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
           level: info
+
+      - name: Перевірка змін у гілці develop
+        run: |
+          git checkout develop
+          git pull
+          git log --oneline --graph > develop_changes.txt
+          cat develop_changes.txt
